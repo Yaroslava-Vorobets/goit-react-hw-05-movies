@@ -25,7 +25,7 @@ import {Main, Card, Wrap, BackButton, Image, MovieTitle, SecondaryTitle } from '
     }
 
     const BackLink = location.state?.from ?? '/movies';
-     const genres = [];
+    //  const genres = [];
     return (
         <Main>  
             <Link to={BackLink}> <BackButton>go back</BackButton> </Link>        
