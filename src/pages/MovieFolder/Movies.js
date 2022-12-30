@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { NavLink } from "react-router-dom";
 
 // export const Section = styled.header`
 //    top: 0;
@@ -21,9 +22,16 @@ import styled from 'styled-components';
 export const MovieTitle = styled.h1`
     padding: 4px;
     margin-left: 35px;
-    font-size:35px;
+    font-size: 20px;
     color: #182351;
 `;
+export const Link = styled(NavLink)`
+   
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    font-weight: 500;
+`;
+
 
 export const SearchForm = styled.form`
   display: flex;
@@ -54,9 +62,6 @@ export const SearchForm = styled.form`
   opacity: 1;
 }`
 
-
-
-
 export const SearchFormInput = styled.input `
     display: inline-block;
     width: 100%;
@@ -77,26 +82,21 @@ export const SearchFormInput = styled.input `
 
 
 export const ImageItem = styled.li`
-    display:flex;
-    justify-content: space-around;
-    margin: 15px;
-    padding: 20px;
-    border-radius: 2px;
-    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2),
-    0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+   flex-basis: calc((100% - 60px) / 4);
 `;
 
 export const Image = styled.img`
-  width: 50%;
-  border-radius: 10px;
-  height: 400px;
-  object-fit: cover;
-  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
-  &:hover,
-  &:focus {
-    transform: scale(1.03);
-    cursor: zoom-in;
-  }
+ margin-bottom: 10px;
+    transition: background 250ms cubic-bezier(0.075, 0.82, 0.165, 1) 0s, box-shadow 250ms cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
+    border-radius: 5px;
+ 
 `;
 
 
+export const Lists = styled.ul`   
+    display: flex;
+    flex-wrap: wrap;
+    -webkit-box-pack: center;
+    justify-content: center;
+    gap: 20px;
+`;

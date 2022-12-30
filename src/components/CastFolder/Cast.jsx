@@ -5,7 +5,7 @@ import { getCastMovie } from 'Api';
 // import { toast } from 'react-toastify';
 import { List, Image, Info, Item } from '../CastFolder/Cast.Styled'
 
-export const Cast = () => {
+ const Cast = () => {
     const [cast, setCast] = useState([]);
     const { movieId } = useParams();
     // const [loading, setLoading] = useState(false);
@@ -38,3 +38,5 @@ export const Cast = () => {
         </ List>
     )
 }
+
+export default Cast
