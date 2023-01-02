@@ -21,24 +21,20 @@ import 'react-toastify/dist/ReactToastify.min.css';
         if (filterQuery === '') {            
             return
         }      
-      
-       else {
-            setLoading(true);
-            getMovies(filterQuery)
-                .then(({ results }) => {
-                    if (results.length < 0) {
-                        toast.error(`Sorry! We couldn't find yuor request, please try again`)
-                        return
-                    } else
-                    { setMovies(results) }
-                        
-                    
-                })              
+        setLoading(true);
+        getMovies(filterQuery)
+            .then(({ results }) => {
+                if (results.length < 0) {
+                    toast.error(`Sorry! We couldn't find yuor request, please try again`)
+                    return
+                }
+                setMovies(results)
+            })              
                 .catch(error => {
                      toast('Something went wrong! Please retry!');
                 })
                 .finally( setLoading(false))
-        }
+      
   }, [filterQuery]);  
 
 
