@@ -1,4 +1,5 @@
-import { Outlet,  useLocation } from 'react-router-dom';
+
+import { Outlet, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useSearchParams } from "react-router-dom";
 import { Suspense } from "react";
@@ -75,4 +76,5 @@ import 'react-toastify/dist/ReactToastify.min.css';
     );
 }
 export default Movies;
+
 

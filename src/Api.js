@@ -10,7 +10,7 @@ return  fetch(`https://api.themoviedb.org/3/trending/all/day?api_key=ebb8165ea94
 } 
 
 export function getMovies(filterQuery) {
-  return fetch(`http://api.themoviedb.org/3/search/movie?api_key=ebb8165ea943e33fa7a8dadcac1ff998&include_adult=false&language=en-US&page=1&query=${filterQuery}`)
+  return fetch(`https://api.themoviedb.org/3/search/movie?api_key=ebb8165ea943e33fa7a8dadcac1ff998&language=en-USpage=1&query=${filterQuery}&include_adult=false`)
  
    .then(res => {
           if (res.ok) {
