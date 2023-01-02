@@ -1,31 +1,34 @@
 import { useState, useEffect } from 'react';
 import {useParams} from "react-router-dom";
 import { getCastMovie } from 'Api';
-// import { Loader } from 'components/Loader/Loader.jsx'
-// import { toast } from 'react-toastify';
+import { Loader } from 'components/Loader/Loader.jsx'
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css';
 import { List, Image, Info, Item } from '../CastFolder/Cast.Styled'
 
  const Cast = () => {
     const [cast, setCast] = useState([]);
     const { movieId } = useParams();
-    // const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => { 
-
+    setLoading(true);  
        getCastMovie(movieId)
-           .then(({cast}) => {
+        .then(({cast}) => {
                setCast(cast)        
            })
+        .catch(error => {
+            toast.error('Something went wrong! Please retry!');
+                })
+        .finally( setLoading(false))
        
     },[movieId])
 
-    // if (cast.length === 0) {
     
-    //     return toast( `We don't have any reviews for this movie`)
-    // } 
-    return (
-        < List> 
-            {cast.length > 0 && cast.map(({ profile_path, id, original_title, name, character }) => {
+     return (
+        <>
+       {cast && < List> 
+            {cast.map(({ profile_path, id, original_title, name, character }) => {
                 return (
                     < Item key={id}>
                         < Image  src={profile_path
@@ -35,7 +38,9 @@ import { List, Image, Info, Item } from '../CastFolder/Cast.Styled'
                         <Info>character: {character}</Info>
                     </ Item>);   
                     })}         
-        </ List>
+        </ List>}
+         { loading && <Loader /> }
+     </>
     )
 }
 

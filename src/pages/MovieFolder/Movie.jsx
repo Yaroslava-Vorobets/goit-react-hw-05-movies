@@ -17,16 +17,25 @@ import 'react-toastify/dist/ReactToastify.min.css';
     const filterQuery = searchParams.get("filterQuery") ?? "";
   
 
-    useEffect(() => {
+        useEffect(() => {  
         if (filterQuery === '') {            
             return
-        } else {
+        }
+        if (!filterQuery ) {
+         toast.error(`Sorry! We couldn't find yuor request, please try again`)  ;
+        return
+            }
+      
+       else {
             setLoading(true);
             getMovies(filterQuery)
                 .then(({ results }) => {
-                    results.length < 0 ?
-                        toast.error(`Sorry! We couldn't find yuor request, please try again`)
-                        : setMovies(results)      
+                    if (results.length < 0) {
+                        toast.error(`Sorry! We couldn't find yuor request, please try again`)  
+                    } else
+                    { setMovies(results) }
+                        
+                    
                 })              
                 .catch(error => {
                      toast('Something went wrong! Please retry!');
@@ -35,18 +44,14 @@ import 'react-toastify/dist/ReactToastify.min.css';
         }
   }, [filterQuery]);  
 
-  
- 
-    // const ChangeFilterQuery = value => {
-    //    setSearchParams(value !== ""? {filterQuery: value} : {})
-    // }    
-  
 
     const handleSubmit = e => {
-    e.preventDefault();    
-    const form = e.currentTarget;        
-    setSearchParams({ filterQuery: form.elements.filterQuery.value })  
-    form.reset();    
+    e.preventDefault();
+    const form = e.currentTarget;
+    setSearchParams( { filterQuery: form.elements.filterQuery.value.trim()  }) 
+    form.reset();
+     
+           
     };
          
  
@@ -55,20 +60,20 @@ import 'react-toastify/dist/ReactToastify.min.css';
             <SearchForm onSubmit={handleSubmit}>        
                 <SearchFormInput  type="text"  name="filterQuery" />
                 < SearchButton  type='submit' >search</ SearchButton >
-            </SearchForm>     
-             {movies && <Lists>
-                        {movies.map(({ title, id, poster_path, original_title}) => (              
-                            <ImageItem key={id}>
-                                <Link to={`/movies/${id}`} state= {{from: location}}> 
-                                    <Image src={poster_path
-                                        ? `https://image.tmdb.org/t/p/w500/${poster_path}`
-                                        : 'https://image.tmdb.org/t/p/w500/'} alt={original_title} />
-                                    < MovieTitle>{title}</ MovieTitle>   
-                                </Link>                                       
-                            </ImageItem>                  
-                                 ))}             
-                         </Lists>}
-             <Suspense fallback={<Loader/>}>
+          </SearchForm>      
+                <Lists>
+                    {movies.map(({ title, id, poster_path, original_title}) => (              
+                        <ImageItem key={id}>
+                            <Link to={`/movies/${id}`} state= {{from: location}}> 
+                                <Image src={poster_path
+                                    ? `https://image.tmdb.org/t/p/w500/${poster_path}`
+                                    : 'https://image.tmdb.org/t/p/w500/'} alt={original_title} />
+                                < MovieTitle>{title}</ MovieTitle>   
+                            </Link>                                       
+                        </ImageItem>                  
+                                ))}             
+                        </Lists>            
+                <Suspense fallback={<Loader/>}>
                 <Outlet />
             </Suspense> 
           {loading && <Loader/>} 

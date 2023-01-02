@@ -22,7 +22,7 @@ const Reviews = lazy(() => import('../ReviewsFolder/Reviews'));
             <Route path="/" element={<SharedLayout />}>
               <Route index element={<Home />} />
               <Route path="/movies" element={<Movies />} />
-              <Route path="/movies/:id" element={<MovieDetails />}>
+              <Route path="/movies/:movieId" element={<MovieDetails />}>
                 <Route path="cast" element={<Cast />} />
                 <Route path="reviews" element={<Reviews />} />
               </Route>
@@ -70,8 +70,8 @@ const Reviews = lazy(() => import('../ReviewsFolder/Reviews'));
                   <Route path="reviews" element={<Reviews/>}/>
               </Route>
               <Route path="*" element={<NotFound />} />
-          </Route>                 
-             </Routes> */}
+          </Route>                  */}
+             {/* </Routes> */}
           </>
  
 

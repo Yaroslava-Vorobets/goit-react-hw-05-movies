@@ -4,11 +4,11 @@ import { useState, useEffect } from 'react';
 import { Loader } from 'components/Loader/Loader.jsx';
 import { toast } from 'react-toastify';
 import { Suspense } from "react";
-import {Main, Card, Wrap, BackButton, Image, MovieTitle, SecondaryTitle } from './MovieDetails.Styled';
+import {Main, Card, Wrap, BackButton, Image,List, MovieTitle, SecondaryTitle } from './MovieDetails.Styled';
 
     const MovieDetails = () => {
     const [results, setResults] = useState({});
-    const { movieId } = useParams();
+    const {movieId} = useParams();
     const [loading, setLoading] = useState(false);
     const location = useLocation();
     
@@ -20,25 +20,24 @@ import {Main, Card, Wrap, BackButton, Image, MovieTitle, SecondaryTitle } from '
                     setResults(results)
                 })
                 .catch(error => {
-                    toast('Something went wrong! Please retry!');
+                    toast.error('Something went wrong! Please retry!');
                 })
                 .finally(setLoading(false));
    
   
     }, [movieId]);  
         
-    const { original_title, poster_path, vote_average, genres, overview } = results;    
+    const {id, original_title, poster_path, vote_average, genres, overview } = results;    
     const score = (vote_average * 100) / 10;
     const BackLink = location.state?.from ?? '/movies';
  
     return (
         <Main>  
             <Link to={BackLink}> <BackButton>go back</BackButton> </Link>        
-            <Card key={results.id}>          
-              
-                <Wrap><Image src={results.poster_path ?
+            <Card key={id}>               
+                <Wrap><Image src={poster_path ?
                     `https://image.tmdb.org/t/p/w500/${poster_path}`
-                    : 'https://image.tmdb.org/t/p/w500/'} alt={results.original_title} />
+                    : 'https://image.tmdb.org/t/p/w500/'} alt={original_title} />                   
                 </Wrap>
                 <Wrap>
                     <MovieTitle>{original_title}</MovieTitle>
@@ -52,10 +51,10 @@ import {Main, Card, Wrap, BackButton, Image, MovieTitle, SecondaryTitle } from '
                 </Wrap>      
             </Card>
             <div>
-                <ul> Aditional information         
+                <List> Aditional information :        
                     <Link to={'Cast'} state={{from:location.state.from}}><li>Cast</li></Link>  
                     <Link to={'Reviews'} state={{from:location.state.from}}><li>Reviews</li></Link>
-                </ul>
+                </List>
                   <Suspense fallback={<Loader />}>
                         <Outlet />
                 </Suspense> 

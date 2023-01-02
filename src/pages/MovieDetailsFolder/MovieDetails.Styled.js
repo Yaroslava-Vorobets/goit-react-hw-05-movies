@@ -49,21 +49,34 @@ export const Card = styled.div`
     0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
 `;
 
-export const Cover = styled.div`
-  margin-left: 35px;
+// export const Cover = styled.div`
+//   margin-left: 35px;
+ 
   
-`;
+// `;
 export const Wrap= styled.div`
   width: 50%;
   border-radius: 10px;
   height: 400px;
  
   transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  &:last-child{
+     margin-left: 20px;
+}
   &:hover,
   &:focus {
     transform: scale(1.03);
     cursor: zoom-in;
   }`
+
+  export const List = styled.ul`   
+    display: flex;
+    flex-wrap: wrap;
+    -webkit-box-pack: center;
+    justify-content: center;
+    gap: 20px;
+    color: #182351;
+`;
 
 
 export const Image = styled.img`
