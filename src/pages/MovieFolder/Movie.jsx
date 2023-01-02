@@ -20,18 +20,15 @@ import 'react-toastify/dist/ReactToastify.min.css';
         useEffect(() => {  
         if (filterQuery === '') {            
             return
-        }
-        if (!filterQuery ) {
-         toast.error(`Sorry! We couldn't find yuor request, please try again`)  ;
-        return
-            }
+        }      
       
        else {
             setLoading(true);
             getMovies(filterQuery)
                 .then(({ results }) => {
                     if (results.length < 0) {
-                        toast.error(`Sorry! We couldn't find yuor request, please try again`)  
+                        toast.error(`Sorry! We couldn't find yuor request, please try again`)
+                        return
                     } else
                     { setMovies(results) }
                         
